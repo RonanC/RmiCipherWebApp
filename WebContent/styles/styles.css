@@ -14,10 +14,8 @@ h1 {
   padding-top: 70px;
 } */
 
-/* icons */
-.icon-flag{
-  width: 28px;  // 14px * 2
-  height: 28px; // 14px * 2
-  background-size: 938px 318px;  // original dimensions * 2
-  background-position: -624px -48px;  // original position * 2
-}
+/* bootstrap word wrap for columns */
+div {
+  word-break: break-all;
+  word-wrap: break-word;
+}​

@@ -6,7 +6,7 @@
 	<div class="page-header">
 		<h1>Error 500<small>whoops</small></h1>
 	</div>
-	
+	<p>Internal server error.</p>
 	<p>An error 500 exception has occurred, details below:</p>
 	<br>
 	<p><b>Exception:</b><br>

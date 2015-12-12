@@ -45,6 +45,25 @@ public class CrackerHandler extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		notReady(req, resp);
 		
+		// user will poll us constantly
+		// rmi will push to us when task is finished
+		
+		
+		// if new request give task number
+			// getTaskNumber()
+			// addTaskToQueue()		// blocking queue
+			// asyncRmiRequest()	// from blockign queue
+		
+		// if repeat request
+			// checkQueue()			// to see if task is finished	// hashmap
+		
+		// if task is finished
+			// popTaskFromQueue()	// hashmap
+			// sendUserResult()		// send them a result JSP page
+		
+		// if task is not finished
+			// sendUserNotReadyPage()
+		
 		try {
 			ready(req, resp);
 		} catch (NotBoundException e) {
@@ -123,19 +142,19 @@ public class CrackerHandler extends HttpServlet {
 //			out.print("<H1>Results:</H1>");	
 			out.print("<div class=\"row\">");
 
-				out.print("<div class=\"col-lg-6\">");
+				out.print("<div class=\"col-lg-6\" style=\"word-wrap: break-word;\">");
 					out.print("<H3>Input data:</H3>");
 					out.print("<p>");
-					out.print("decryption word: " + cipherText + "<br>");
-					out.print("key length: " + keyLen + "<br><br>");
+					out.print("<b>encrypted word:</b><br>" + cipherText + "<br><br>");
+					out.print("<b>key length:</b> " + keyLen + "<br><br>");
 					out.print("</p>");
 				out.print("</div>"); // element
 				
-				out.print("<div class=\"col-lg-6\">");
+				out.print("<div class=\"col-lg-6\" style=\"word-wrap: break-word;\">");
 					out.print("<H3>Output data:</H3>");
 					out.print("<p>");
-					out.print("decrypted word: " + decryptedWord + "<br>");
-					out.print("key word: " + keyWord + "<br>");
+					out.print("<b>decrypted word:</b><br>" + decryptedWord + "<br><br>");
+					out.print("<b>key word:</b> " + keyWord + "<br>");
 					out.print("</p>");
 				out.print("</div>"); // element
 			

@@ -16,7 +16,7 @@
 					<p/>
 
 					<b>Enter Cipher-Text:</b><br>
-					<textarea name="frmCypherText" rows="10" cols="100"  wrap="soft" placeholder="Enter cipher text here..." ng-minlength="10" ng-maxlength="100"  min="10" max="100" ng-model="cipherText" autofocus required></textarea>	
+					<textarea name="frmCypherText" rows="10" cols="100"  wrap="soft" placeholder="Enter cipher text here..." ng-minlength="10" ng-maxlength="10000"  min="10" max="10000" ng-model="cipherText" autofocus required></textarea>	
 					<p/>
 
 
