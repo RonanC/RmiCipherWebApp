@@ -48,4 +48,5 @@
 		<error-code>500</error-code>
 		<location>/errorPages/error500.jsp</location>
 	</error-page>
+	<!-- Test comment -->
 </web-app>
