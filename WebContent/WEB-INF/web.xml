@@ -32,4 +32,20 @@
     <servlet-name>cypher-request-handler</servlet-name>
     <url-pattern>/doProcess</url-pattern>
   </servlet-mapping>
+  
+  <!-- general error page, can also do specific codes instead of exception type, eg: <error-code>500</error-code> -->
+  	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/errorPages/error.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/errorPages/error404.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/errorPages/error500.jsp</location>
+	</error-page>
 </web-app>
