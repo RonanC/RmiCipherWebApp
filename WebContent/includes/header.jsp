@@ -48,6 +48,9 @@
 </head>
 
 <body  ng-app="myApp">
+<%@ include file="navbar.html"%>
+
+
 	<!-- styles for footer and bootstrap container -->
 	<!-- 	<div id="wrap">
  		<div id="main" class="container"> -->

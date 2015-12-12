@@ -15,9 +15,9 @@
 					cipher</li>
 			</ul> <br>
 			<h2 align="center">Options:</h2> <a href="encrypt.jsp"
-			class="btn btn-primary btn-large btn-block" role="button"><span class="glyphicon glyphicon-lock"></span> Encrypt</a>
+			class="btn btn-primary btn-large btn-block" role="button">Encrypt</a>
 			<a href="decrypt.jsp" class="btn btn-primary btn-large btn-block"
-			role="button"><span class="glyphicon glyphicon-remove-circle"></span>Decrypt</a> <br>
+			role="button">Decrypt</a> <br>
 
 
 		</td>

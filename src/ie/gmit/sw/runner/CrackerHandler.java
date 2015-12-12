@@ -102,13 +102,21 @@ public class CrackerHandler extends HttpServlet {
 		
 //		Bootstrap
 		out.print("<!-- Bootstrap --> <!-- Latest compiled and minified CSS --> <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\"> <!-- Optional theme --> <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\"> <!-- Latest compiled and minified JavaScript --> <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"></script>");
+		
+//		my css styles
+		out.print("<link rel=\"stylesheet\" href=\"styles/styles.css\"> <link rel=\"stylesheet\" href=\"styles/sticky-footer.css\">");
+		
 		out.print("</head>");
 		out.print("<body>");
-
+		
+//		navbar
+		out.print("<!-- Fixed navbar --> <nav class=\"navbar navbar-default navbar-fixed-top\"> <div class=\"container\"> <!-- <div class=\"navbar-header\"> <span class=\"glyphicon glyphicon-lock\"></span> </div> --> <ul class=\"nav navbar-nav\"> <li><a href=\"index.jsp\">Home</a></li> <li><a href=\"about.jsp\">About</a></li> <li><a href=\"contact.jsp\">Contact</a></li> </ul> </div> </nav></p> &nbsp; </p> &nbsp; </p>");
+		
+		
 		out.print("<div class=\"container\">");
 		
 			out.print("<div class=\"page-header\">");
-				out.print("<h1>Task Complete <small>yahoo</small></h1>");
+				out.print("<h1>Task Complete <small></small></h1>");
 				out.print("<p>Your task is now complete</p><br><br>");
 			out.print("</div>");
 			
@@ -133,6 +141,9 @@ public class CrackerHandler extends HttpServlet {
 			
 			out.print("</div>"); // row
 		out.print("</div>"); // container
+		
+//		footer
+		out.print("<footer class=\"footer\"> <div class=\"container\"> <p class=\"text-muted\"> <a style=\"color: inherit\" target=\"_blank\" href=\"http://ronanconnolly.ie/\">Ronan Connolly ©</a> <span class=\"pull-right\"><a style=\"color: inherit\" target=\"_blank\" href=\"https://github.com/RonanC\">Github</a></span> </p> </div> </footer>");
 		
 		out.print("</body>");	
 		out.print("</html>");	

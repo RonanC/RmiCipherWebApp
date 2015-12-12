@@ -12,7 +12,7 @@
 				<fieldset>
 					<legend><h3>Cipher Details</h3></legend>
 				
-					<b>Maximum Vigenere Key Length:</b> <input name="frmMaxKeyLength" type="number" size="2" ng-value="7" value="7" min="3" max="10" ng-minlength="3" ng-maxlength="10" required>
+					<b>Maximum Vigenere Key Length:</b> <input name="frmMaxKeyLength" type="number" size="2" ng-value="3" value="3" min="3" max="10" ng-minlength="3" ng-maxlength="10" required>
 					<p/>
 
 					<b>Enter Cipher-Text:</b><br>
