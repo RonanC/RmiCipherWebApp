@@ -5,45 +5,45 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-  <display-name>Software Development Year 4 - Distributed Systems</display-name>
-  <description>
-     2015 Assignment - A Vigenere Cypher Breaker
-  </description>
+	<display-name>Software Development Year 4 - Distributed Systems</display-name>
+	<description>
+		2015 Assignment - A Vigenere Cypher Breaker
+	</description>
 
 
-  <!-- A context is a variable with application wide scope-->
-  <context-param>
-    <param-name>RMI_SERVER</param-name>
- <!--    <param-value>10.2.0.101</param-value> -->
- 	<param-value>127.0.0.1</param-value>
-  </context-param>
+	<!-- A context is a variable with application wide scope -->
+	<context-param>
+		<param-name>RMI_SERVER</param-name>
+		<!-- <param-value>10.2.0.101</param-value> -->
+		<param-value>rmi://localhost:1099/cipher-service</param-value>
+	</context-param>
 
+	<!-- A servlet class must be bound to a name -->
+	<servlet>
+		<servlet-name>cypher-request-handler</servlet-name>
+		<servlet-class>ie.gmit.sw.runner.CrackerHandler</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	
+	<!-- A servlet name must be bound to a URL mapping, i.e. localhost:8080/doProcess 
+		executes the servlet ie.gmit.sw.CrackerHandler in WEB-INF/classes -->
+	<servlet-mapping>
+		<servlet-name>cypher-request-handler</servlet-name>
+		<url-pattern>/doProcess</url-pattern>
+	</servlet-mapping>
 
-
-  <!-- A servlet class must be bound to a name -->
-  <servlet>
-    <servlet-name>cypher-request-handler</servlet-name>
-    <servlet-class>ie.gmit.sw.runner.CrackerHandler</servlet-class>
-    <load-on-startup>0</load-on-startup>
-  </servlet>
-  
-  <!-- A servlet name must be bound to a URL mapping, i.e. localhost:8080/doProcess executes the servlet ie.gmit.sw.CrackerHandler in WEB-INF/classes -->
-  <servlet-mapping>
-    <servlet-name>cypher-request-handler</servlet-name>
-    <url-pattern>/doProcess</url-pattern>
-  </servlet-mapping>
-  
-  <!-- general error page, can also do specific codes instead of exception type, eg: <error-code>500</error-code> -->
-  	<error-page>
+	<!-- general error page, can also do specific codes instead of exception 
+		type, eg: <error-code>500</error-code> -->
+	<error-page>
 		<exception-type>java.lang.Exception</exception-type>
 		<location>/errorPages/error.jsp</location>
 	</error-page>
-	
+
 	<error-page>
 		<error-code>404</error-code>
 		<location>/errorPages/error404.jsp</location>
 	</error-page>
-	
+
 	<error-page>
 		<error-code>500</error-code>
 		<location>/errorPages/error500.jsp</location>

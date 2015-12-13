@@ -6,7 +6,12 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,14 +26,20 @@ import ie.gmit.sw.cipher.VigenereBreaker;
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/CrackerHandler" })
 public class CrackerHandler extends HttpServlet {
-	private String remoteHost = null;
+	public static String remoteHost = null;
 	private static long jobNumber = 0;
 	
 	private static final long serialVersionUID = 1L;
-       
+      
+	private BlockingQueue reqQueue;
+	private Map<Long, Result> resMap;
+	
 	public void init() throws ServletException {
 		ServletContext ctx = getServletContext();
 		remoteHost = ctx.getInitParameter("RMI_SERVER"); //Reads the value from the <context-param> in web.xml
+	
+		reqQueue = new ArrayBlockingQueue<Task>(10);
+		resMap = new ConcurrentHashMap<Long, Result>();
 	}
 	
     /**
@@ -43,15 +54,60 @@ public class CrackerHandler extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		int maxKeyLen = Integer.parseInt(req.getParameter("frmMaxKeyLen"));
+		String cipherText = req.getParameter("frmCipherText");
+		String taskNumStr = req.getParameter("frmTaskNum");
+		//long taskNum = Integer.parseInt(req.getParameter("frmStatus"));
+		long taskNum = Integer.parseInt(taskNumStr);
+		
+		System.out.println("maxKeyLength: " + maxKeyLen + "\tcypherText: " + cipherText + "\ttaskNumber: " + taskNum + "\n");
+		
+		if (taskNum == -1){	// new request, add to queue
+			jobNumber++;
+			Task task = new Task(cipherText, maxKeyLen, jobNumber);
+			System.out.println("Created new task: " + task.toString());
+			
+			//Add job to in-queue
+			TaskProducer producer = new TaskProducer(reqQueue, task);
+			new Thread(producer).start();
+			
+			// forward them to a waiting page
+			RequestDispatcher rd = req.getRequestDispatcher("task-wait.jsp?frmMaxKeyLen=" + task.getMaxKeyLen() + "&frmCipherText=" + task.getCipherText() +  "&frmTaskNum=" + task.getTaskNum());
+			rd.forward(req, resp);
+		}else{						// old request, check result map
+			System.out.println("Checking task: " + taskNum);
+			//Check out-queue for finished job
+			
+			if(resMap.containsKey(taskNum)){
+				System.out.println("Task #" + taskNum + " is on map.");
+				Result result = resMap.get(taskNum);
+				System.out.println("Adding result data to new page. Data: " + result.toString());
+				// forward them to a finished page
+				RequestDispatcher rd = req.getRequestDispatcher("task-finish.jsp?keyWord=" + result.getKeyWord() + "&keyLen=" + result.getKeyLen() + "&plainText=" + result.getPlainText() + "&taskNum=" + result.getTaskNum() + "&cipherText=" + result.getCipherTextGiven() + "&maxKeyLen=" + result.getMaxKeyLenGiven());
+				System.out.println("forwarding...");
+				rd.forward(req, resp);
+			} else{
+				System.out.println("Task #" + taskNum + " is on not on the map yet.");
+				// create a new thread to check
+				TaskConsumer consumer = new TaskConsumer(reqQueue, resMap);
+				new Thread(consumer).start();
+				
+				// forward them to a waiting page
+				RequestDispatcher rd = req.getRequestDispatcher("task-wait.jsp?frmMaxKeyLen=" + maxKeyLen + "&frmCipherText=" + cipherText +  "&frmTaskNum=" + taskNum);
+				rd.forward(req, resp);
+			}
+		}
+		
 //		notReady(req, resp);
 		
 		// user will poll us constantly
 		// rmi will push to us when task is finished
-		
-		
+			
 		// if new request give task number
 			// getTaskNumber()
 			// addTaskToQueue()		// blocking queue
+			
 			// asyncRmiRequest()	// from blockign queue
 		
 		// if repeat request
@@ -64,14 +120,14 @@ public class CrackerHandler extends HttpServlet {
 		// if task is not finished
 			// sendUserNotReadyPage()
 		
-		try {
-			ready(req, resp);
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			ready(req, resp);
+//		} catch (NotBoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -87,7 +143,7 @@ public class CrackerHandler extends HttpServlet {
 		// get data
 		int keyLen = Integer.parseInt(req.getParameter("frmMaxKeyLength"));
 		String cipherText = req.getParameter("frmCypherText");
-		VigenereBreaker vb = (VigenereBreaker) Naming.lookup("rmi://localhost:1099/cipher-service");
+		VigenereBreaker vb = (VigenereBreaker) Naming.lookup(remoteHost);
 		// lookup stuff
 //		String deWordTest = "JNORDDBENCAWUINQMZWTVAIVWINV";
 //		int keyLenTest = 3;
@@ -254,4 +310,9 @@ public class CrackerHandler extends HttpServlet {
 //		System.out.println("result is: " + decryptedWord);
 //	}
 
+
+//		BlockingQueue (int)
+
+	
+	
 }
