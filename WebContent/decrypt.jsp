@@ -16,8 +16,12 @@
 					<p/>
 
 					<b>Enter Cipher-Text:</b><br>
-					<textarea name="frmCypherText" ng-model="cipherText" rows="10" cols="100"  wrap="soft" placeholder="Enter cipher text here..." ng-minlength="10" ng-maxlength="10000"  min="10" max="10000" autofocus required></textarea>	
+					<textarea name="frmInputText" ng-model="cipherText" rows="10" cols="100"  wrap="soft" placeholder="Enter cipher text here..." ng-minlength="10" ng-maxlength="10000"  min="10" max="10000" autofocus required></textarea>	
 					<p/>
+					
+					<input name="frmTaskNum" type="hidden" value="-1">
+					<input name="frmTaskType" type="hidden" value="1">
+					<!-- 1 = decrypt -->
 
 					<center><input class="btn btn-primary" type="submit" value="Decrypt Text" ng-disabled="decryptForm.$error.required || decryptForm.$error.minlength || decryptForm.$error.maxlength"></center>
 					<!-- cipherForm.$error.required || cipherForm.$error.minlength -->

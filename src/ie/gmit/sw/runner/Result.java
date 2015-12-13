@@ -1,19 +1,28 @@
 package ie.gmit.sw.runner;
 
 public class Result {
-	private String plainText;
+	private String resultText;
 	private long taskNum;
 	private String keyWord;
 	private int keyLen;
-	private String cipherTextGiven;
+	private String inputText;
 	private int maxKeyLenGiven;
+	private TaskType taskType;
 
-	public String getCipherTextGiven() {
-		return cipherTextGiven;
+	public TaskType getTaskType() {
+		return taskType;
 	}
 
-	public void setCipherTextGiven(String cipherTextGiven) {
-		this.cipherTextGiven = cipherTextGiven;
+	public void setTaskType(TaskType taskType) {
+		this.taskType = taskType;
+	}
+
+	public String getInputText() {
+		return inputText;
+	}
+
+	public void setInputText(String inputText) {
+		this.inputText = inputText;
 	}
 
 	public int getMaxKeyLenGiven() {
@@ -24,19 +33,30 @@ public class Result {
 		this.maxKeyLenGiven = maxKeyLenGiven;
 	}
 
-	public Result(String plainText, long taskNum, String key, int keyLen) {
-		this.plainText = plainText;
+	// used for cracking only, hence the keyLen
+	public Result(String resultText, long taskNum, String key, int keyLen, TaskType taskType) {
+		this.resultText = resultText;
 		this.taskNum = taskNum;
 		this.keyWord = key;
 		this.keyLen = keyLen;
+		this.taskType = taskType;
 	}
 
-	public String getPlainText() {
-		return plainText;
+	// used for either encryption or decryption
+	public Result(String resultText, long taskNum, TaskType taskType, String keyWord, String inputText) {
+		this.taskNum = taskNum;
+		this.taskType = taskType;
+		this.keyWord = keyWord;
+		this.inputText = inputText;
+		this.resultText = resultText;
 	}
 
-	public void setPlainText(String plainText) {
-		this.plainText = plainText;
+	public String getResultText() {
+		return resultText;
+	}
+
+	public void setResultText(String resultText) {
+		this.resultText = resultText;
 	}
 
 	public long getTaskNum() {
@@ -65,9 +85,9 @@ public class Result {
 
 	@Override
 	public String toString() {
-		return "Result [plainText=" + plainText + ", taskNum=" + taskNum + ", keyWord=" + keyWord + ", keyLen=" + keyLen
-				+ ", cipherTextGiven=" + cipherTextGiven + ", maxKeyLenGiven=" + maxKeyLenGiven + "]";
+		return "Result [resultText=" + resultText + ", taskNum=" + taskNum + ", keyWord=" + keyWord + ", keyLen="
+				+ keyLen + ", inputText=" + inputText + ", maxKeyLenGiven=" + maxKeyLenGiven + ", taskType=" + taskType
+				+ "]";
 	}
-	
-	
+
 }

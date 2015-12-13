@@ -1,26 +1,43 @@
 package ie.gmit.sw.runner;
 
 public class Task {
-	private String cipherText;
+	private String inputText;
 	private int maxKeyLen;
 	private long taskNum;
-	
-//	public Request() {
-//		
-//	}
-	
-	public Task(String cipherText, int maxKeyLen, long taskNum) {
-		this.cipherText = cipherText;
-		this.maxKeyLen = maxKeyLen;
-		this.taskNum = taskNum;
-	}
-	
-	public String getCipherText() {
-		return cipherText;
+	private String keyWord;
+	private TaskType taskType;
+
+	public TaskType getTaskType() {
+		return taskType;
 	}
 
-	public void setCipherText(String cypherText) {
-		this.cipherText = cypherText;
+	public void setTaskType(TaskType taskType) {
+		this.taskType = taskType;
+	}
+	
+	// encrypt/decrypt
+	public Task(String inputText, String keyWord, long taskNum, TaskType taskType) {
+		this.inputText = inputText;
+		this.keyWord = keyWord;
+		System.out.println("contructor: keyWord: " + keyWord);
+		this.taskNum = taskNum;
+		this.taskType = taskType;
+	}
+	
+	// crack
+	public Task(String inputText, int maxKeyLen, long taskNum, TaskType taskType) {
+		this.inputText = inputText;
+		this.maxKeyLen = maxKeyLen;
+		this.taskNum = taskNum;
+		this.taskType = taskType;
+	}
+	
+	public String getInputText() {
+		return inputText;
+	}
+
+	public void setInputText(String inputText) {
+		this.inputText = inputText;
 	}
 
 	public int getMaxKeyLen() {
@@ -39,9 +56,24 @@ public class Task {
 		this.taskNum = taskNum;
 	}
 
+	
+	
+	public String getKeyWord() {
+		return keyWord;
+	}
+
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
+	}
+
 	@Override
 	public String toString() {
-		return "Request [cypherText=" + cipherText + ", maxKeyLen=" + maxKeyLen + ", taskNum=" + taskNum + "]";
+		return "Task [inputText=" + inputText + ", maxKeyLen=" + maxKeyLen + ", taskNum=" + taskNum + ", keyWord="
+				+ keyWord + ", taskType=" + taskType + "]";
 	}
+
+
+
+
 	
 }

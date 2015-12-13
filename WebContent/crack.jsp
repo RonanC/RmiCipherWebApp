@@ -1,6 +1,6 @@
 <%@ include file="includes/header.jsp" %>
 
-<div class="animated bounceInDown" style="font-size:48pt; font-family:arial; color:#990000; font-weight:bold">Vigenere Cipher Breaker</div>
+<div class="animated bounceInDown" style="font-size:48pt; font-family:arial; color:#990000; font-weight:bold">Vigenere Cipher Cracker</div>
 
 </p>&nbsp;</p>&nbsp;</p>
 
@@ -16,10 +16,12 @@
 					<p/>
 
 					<b>Enter Cipher-Text:</b><br>
-					<textarea name="frmCipherText" ng-model="cipherText" rows="10" cols="100"  wrap="soft" placeholder="Enter cipher text here..." ng-minlength="10" ng-maxlength="10000"  min="10" max="10000" autofocus required></textarea>	
+					<textarea name="frmInputText" ng-model="cipherText" rows="10" cols="100"  wrap="soft" placeholder="Enter cipher text here..." ng-minlength="10" ng-maxlength="10000"  min="10" max="10000" autofocus required></textarea>	
 					<p/>
 					
 					<input name="frmTaskNum" type="hidden" value="-1">
+					<input name="frmTaskType" type="hidden" value="2">
+					<!-- 2 = crack -->
 					
 					<center><input class="btn btn-primary" type="submit" value="Crack Cypher" ng-disabled="cipherForm.$error.required || cipherForm.$error.minlength || cipherForm.$error.maxlength"></center>
 					<!-- cipherForm.$error.required || cipherForm.$error.minlength -->

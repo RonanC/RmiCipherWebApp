@@ -16,8 +16,12 @@
 					<p/>
 
 					<b>Enter Plain-Text:</b><br>
-					<textarea name="frmPlainText" ng-model="plainText" rows="10" cols="100"  wrap="soft" placeholder="Enter plain text here..." ng-minlength="10" ng-maxlength="10000"  min="10" max="10000" autofocus required></textarea>	
+					<textarea name="frmInputText" ng-model="plainText" rows="10" cols="100"  wrap="soft" placeholder="Enter plain text here..." ng-minlength="10" ng-maxlength="10000"  min="10" max="10000" autofocus required></textarea>	
 					<p/>
+					
+					<input name="frmTaskNum" type="hidden" value="-1">
+					<input name="frmTaskType" type="hidden" value="0">
+					<!-- 0 = encrypt -->
 
 
 					<center><input class="btn btn-primary" type="submit" value="Encrypt Text" ng-disabled="encryptForm.$error.required || encryptForm.$error.minlength || encryptForm.$error.maxlength"></center>
