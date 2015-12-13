@@ -32,6 +32,7 @@
 	<b>Text:</b> <%=resultText%> <br>
 	<% if(Integer.parseInt(maxKeyLen) != -1  && Integer.parseInt(maxKeyLen) != 0){
 		out.print("<b>Actual Key Length:</b> " + keyLen + "<br>");
+		out.print("<b>Keyword:</b> " + keyWord + "<br>");
 	}
 	%>
 	</p>
