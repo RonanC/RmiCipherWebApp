@@ -3,7 +3,7 @@
 <div class="animated bounceInDown" style="font-size:48pt; font-family:arial; color:#990000; font-weight:bold">Vigenère Cipher Cracker</div>
 
 <br><br><br>
-<p>This program can only crack words with a max length of 5 in a reasonable time.<br>The program is limited to a maximum key length of 5 as to not block the system</p>
+<p>This program can only crack words with a max key length of 5 in a reasonable time.<br>The program is limited to a maximum key length of 5 as to not block the system.</p>
 <br>
 <table width="600" cellspacing="0" cellpadding="7" border="0" ng-controller="InfoController">
 	<tr>
@@ -17,7 +17,7 @@
 					<p/>
 
 					<b>Enter Cipher-Text:</b><br>
-					<textarea name="frmInputText" ng-model="cipherText" rows="10" cols="100"  wrap="soft" placeholder="Enter cipher text here..." ng-minlength="10" ng-maxlength="10000"  min="10" max="10000" autofocus required></textarea>	
+					<textarea name="frmInputText" ng-model="cipherText" rows="10" cols="100"  wrap="soft" placeholder="Enter cipher text here..." ng-minlength="20" ng-maxlength="10000"  min="20" max="10000" autofocus required></textarea>	
 					<p/>
 					
 					<input name="frmTaskNum" type="hidden" value="-1">

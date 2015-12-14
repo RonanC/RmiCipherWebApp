@@ -3,8 +3,10 @@
 <div class="animated bounceInDown" style="font-size:48pt; font-family:arial; color:#990000; font-weight:bold">Vigenère Cipher Encrypter</div>
 
 <br><br><br>
-<p>This program can only crack words with a max length of 5 in a reasonable time.<br>If you choose a keyword of more then 5 characters, make sure to provide the keyword to the recipient.</p>
+<p>This program can only crack text with a max keyword length of 5 in a reasonable time.<br>If you choose a keyword of more then 5 characters, make sure to provide the keyword to the recipient.</p>
 <p>Only letters will be kept; all punctuation, spaces and numbers will be removed.</p>
+<p>Slang words, names of people & places, and other non common words may throw off the cracking.<br>
+The longer the sentence the more accurate the crack will be.</p>
 <br>
 <table width="600" cellspacing="0" cellpadding="7" border="0" ng-controller="InfoController">
 	<tr>
@@ -18,7 +20,7 @@
 					<p/>
 
 					<b>Enter Plain-Text:</b><br>
-					<textarea name="frmInputText" ng-model="plainText" rows="10" cols="100"  wrap="soft" placeholder="Enter plain text here..." ng-minlength="10" ng-maxlength="10000"  min="10" max="10000" autofocus required></textarea>	
+					<textarea name="frmInputText" ng-model="plainText" rows="10" cols="100"  wrap="soft" placeholder="Enter plain text here..." ng-minlength="20" ng-maxlength="1000"  min="20" max="1000" autofocus required></textarea>	
 					<p/>
 					
 					<input name="frmTaskNum" type="hidden" value="-1">
