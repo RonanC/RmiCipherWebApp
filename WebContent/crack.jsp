@@ -1,9 +1,10 @@
 <%@ include file="includes/header.jsp" %>
 
-<div class="animated bounceInDown" style="font-size:48pt; font-family:arial; color:#990000; font-weight:bold">Vigenere Cipher Cracker</div>
+<div class="animated bounceInDown" style="font-size:48pt; font-family:arial; color:#990000; font-weight:bold">Vigenère Cipher Cracker</div>
 
-</p>&nbsp;</p>&nbsp;</p>
-
+<br><br><br>
+<p>This program can only crack words with a max length of 5 in a reasonable time.<br>The program is limited to a maximum key length of 5 as to not block the system</p>
+<br>
 <table width="600" cellspacing="0" cellpadding="7" border="0" ng-controller="InfoController">
 	<tr>
 		<td valign="top">
@@ -12,7 +13,7 @@
 				<fieldset>
 					<legend><h3>Cipher Details</h3></legend>
 				
-					<b>Maximum Vigenere Key Length:</b> <input name="frmMaxKeyLen" type="number" size="2" ng-value="3" value="3" min="3" max="10" ng-minlength="3" ng-maxlength="10" required>
+					<b>Maximum Vigenere Key Length:</b> <input name="frmMaxKeyLen" type="number" size="2" ng-value="3" value="3" min="3" max="5" ng-minlength="3" ng-maxlength="5" required>
 					<p/>
 
 					<b>Enter Cipher-Text:</b><br>

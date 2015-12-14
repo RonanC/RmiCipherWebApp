@@ -4,7 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Vigenere Cypher Breaker</title>
+<% 
+String title = request.getParameter("title");
+if(title == null){
+	title = "Vigenere Cypher Breaker";
+}
+%>
+
+<title><%=title%></title>
 
 <!-- Bootstrap -->
 <!-- Latest compiled and minified CSS -->

@@ -2,10 +2,7 @@ package ie.gmit.sw.runner;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -19,8 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ie.gmit.sw.cipher.VigenereBreaker;
-
 /**
  * Servlet implementation class CrackerHandler
  */
@@ -30,11 +25,17 @@ public class CrackerHandler extends HttpServlet {
 	private static long jobNumber = 0;
 	private static final long serialVersionUID = 1L;
       
-	private BlockingQueue reqQueue;
+	private BlockingQueue<Task> reqQueue;
 	private Map<Long, Result> resMap;
 	
 	// we will create a new thread for each request and that thread will run to completion.
 	// we will have one thread for talking to the RMI program, this will run infinitely.
+	
+	// this is the main servlet class that handles all requests
+	
+	// a possible feature to be added is one that lets users type in their task number to view a previously issued task, 
+	// as at the moment they need to wait on the page
+	// although this could cause security issues as users could check other peoples requests while they are waiting
 	
 	public void init() throws ServletException {
 		ServletContext ctx = getServletContext();
@@ -153,9 +154,12 @@ public class CrackerHandler extends HttpServlet {
 		Result result = resMap.get(taskNum);
 		System.out.println("Adding result data to new page. Data: " + result.toString());
 		// forward them to a finished page
-		RequestDispatcher rd = req.getRequestDispatcher("task-finish.jsp?keyWord=" + result.getKeyWord() + "&keyLen=" + result.getKeyLen() + "&resultText=" + result.getResultText() + "&taskNum=" + result.getTaskNum() + "&inputText=" + result.getInputText() + "&maxKeyLen=" + result.getMaxKeyLenGiven() + "&taskType=" + result.getTaskType());
+		RequestDispatcher rd = req.getRequestDispatcher("task-finish.jsp?keyWord=" + result.getKeyWord() + "&keyLen=" + result.getKeyLen() + "&resultText=" + result.getResultText() + "&taskNum=" + result.getTaskNum() + "&inputText=" + result.getInputText() + "&maxKeyLen=" + result.getMaxKeyLenGiven() + "&taskType=" + result.getTaskType() + "&title=Finished");
 		System.out.println("forwarding...");
 		rd.forward(req, resp);
+		
+		// remove task from map
+		resMap.remove(result.getTaskNum());
 	}
 
 	private void enqueueTask(HttpServletRequest req, HttpServletResponse resp, int maxKeyLen, String inputText, TaskType taskType, String keyWord)
@@ -177,7 +181,7 @@ public class CrackerHandler extends HttpServlet {
 		new Thread(producer).start();
 		
 		// forward them to a waiting page
-		RequestDispatcher rd = req.getRequestDispatcher("task-wait.jsp?frmMaxKeyLen=" + task.getMaxKeyLen() + "&frmCipherText=" + task.getInputText() +  "&frmTaskNum=" + task.getTaskNum());
+		RequestDispatcher rd = req.getRequestDispatcher("task-wait.jsp?frmMaxKeyLen=" + task.getMaxKeyLen() + "&frmCipherText=" + task.getInputText() +  "&frmTaskNum=" + task.getTaskNum() + "&title=Processing");
 		rd.forward(req, resp);
 	}
 	
@@ -250,7 +254,6 @@ public class CrackerHandler extends HttpServlet {
 	private void jhServletCodeExample(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
-
 		
 		int maxKeyLength = Integer.parseInt(req.getParameter("frmMaxKeyLength"));
 		String cypherText = req.getParameter("frmCypherText");
@@ -270,7 +273,6 @@ public class CrackerHandler extends HttpServlet {
 		out.print("<P>CypherText: " + cypherText);
 		out.print("<P>This servlet should only be responsible for handling client request and returning responses. Everything else should be handled by different objects.");
 		out.print("<P>Note that any variables declared inside this doGet() method are thread safe. Anything defined at a class level is shared between HTTP requests.");				
-
 
 		out.print("<P> Next Steps:");	
 		out.print("<OL>");

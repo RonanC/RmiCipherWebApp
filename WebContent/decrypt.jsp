@@ -1,9 +1,10 @@
 <%@ include file="includes/header.jsp" %>
 
-<div class="animated bounceInDown" style="font-size:48pt; font-family:arial; color:#990000; font-weight:bold">Vigenere Cipher Decrypter</div>
+<div class="animated bounceInDown" style="font-size:48pt; font-family:arial; color:#990000; font-weight:bold">Vigenère Cipher Decrypter</div>
 
-</p>&nbsp;</p>&nbsp;</p>
-
+<br><br><br>
+<!-- <p>This program can only crack words with a max length of 5 in a reasonable time.<br></p>
+<br> -->
 <table width="600" cellspacing="0" cellpadding="7" border="0" ng-controller="InfoController">
 	<tr>
 		<td valign="top">

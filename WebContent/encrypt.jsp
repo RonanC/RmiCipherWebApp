@@ -1,9 +1,11 @@
 <%@ include file="includes/header.jsp" %>
 
-<div class="animated bounceInDown" style="font-size:48pt; font-family:arial; color:#990000; font-weight:bold">Vigenere Cipher Encrypter</div>
+<div class="animated bounceInDown" style="font-size:48pt; font-family:arial; color:#990000; font-weight:bold">Vigenère Cipher Encrypter</div>
 
-</p>&nbsp;</p>&nbsp;</p>
-
+<br><br><br>
+<p>This program can only crack words with a max length of 5 in a reasonable time.<br>If you choose a keyword of more then 5 characters, make sure to provide the keyword to the recipient.</p>
+<p>Only letters will be kept; all punctuation, spaces and numbers will be removed.</p>
+<br>
 <table width="600" cellspacing="0" cellpadding="7" border="0" ng-controller="InfoController">
 	<tr>
 		<td valign="top">
